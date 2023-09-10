@@ -3,18 +3,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
-interface RequestBody {
-  stripe_id: string;
-  name: string;
-  address: string;
-  zipcode: string;
-  city: string;
-  country: string;
-  total: string;
-  products: { id: string }[];
-}
-
-export async function POST(req: { json: () => Promise<RequestBody> }) {
+export async function GET() {
   const supabase = createServerComponentClient({ cookies });
 
   try {
@@ -24,32 +13,20 @@ export async function POST(req: { json: () => Promise<RequestBody> }) {
 
     if (!user) throw Error();
 
-    const body = await req.json();
-
-    const order = await prisma.orders.create({
-      data: {
-        user_id: user?.id,
-        stripe_id: body.stripe_id,
-        name: body.name,
-        address: body.address,
-        zipcode: body.zipcode,
-        city: body.city,
-        country: body.country,
-        total: Number(body.total),
+    const orders = await prisma.orders.findMany({
+      where: { user_id: user?.id },
+      orderBy: { id: "desc" },
+      include: {
+        orderItem: {
+          include: {
+            product: true,
+          },
+        },
       },
     });
 
-    for (const prod of body.products) {
-      await prisma.orderItem.create({
-        data: {
-          order_id: order.id,
-          product_id: Number(prod.id),
-        },
-      });
-    }
-
     await prisma.$disconnect();
-    return NextResponse.json("Order Complete", { status: 200 });
+    return NextResponse.json(orders);
   } catch (error) {
     console.log(error);
     await prisma.$disconnect();

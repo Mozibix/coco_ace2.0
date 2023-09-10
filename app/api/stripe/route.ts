@@ -1,36 +1,17 @@
-import Stripe from "stripe";
+import prisma from "@/app/libs/prisma";
 import { NextResponse } from "next/server";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
 
-export async function POST(req: { json: () => Promise<any> }) {
-  const supabase = createServerComponentClient({ cookies });
-
+export async function GET(req: any, context: any) {
   try {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user) throw Error();
-
-    const body = await req.json();
-
-    const stripe = new Stripe(process.env.STRIPE_SK_KEY || "", {
-      apiVersion: "2023-08-16",
+    const { id } = context.params;
+    const product = await prisma.products.findFirst({
+      where: { id: Number(id) },
     });
-
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: Number(body.amount),
-      currency: "gbp",
-    });
-
-    await stripe.paymentIntents.update(paymentIntent.id, {
-      payment_method: body.paymentMethodId,
-    });
-
-    return NextResponse.json(paymentIntent);
+    await prisma.$disconnect();
+    return NextResponse.json(product);
   } catch (error) {
     console.log(error);
+    await prisma.$disconnect();
     return new NextResponse("Something went wrong", { status: 400 });
   }
 }
