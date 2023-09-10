@@ -3,7 +3,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
-export async function POST(req: { json: () => Promise<any> }) {
+export async function GET() {
   const supabase = createServerComponentClient({ cookies });
 
   try {
@@ -13,18 +13,10 @@ export async function POST(req: { json: () => Promise<any> }) {
 
     if (!user) throw Error();
 
-    const body = await req.json();
-
-    const res = await prisma.addresses.update({
-      where: { id: Number(body.addressId) },
-      data: {
-        name: body.name,
-        address: body.address,
-        zipcode: body.zipcode,
-        city: body.city,
-        country: body.country,
-      },
+    const res = await prisma.addresses.findFirst({
+      where: { user_id: user?.id },
     });
+
     await prisma.$disconnect();
     return NextResponse.json(res);
   } catch (error) {
