@@ -13,18 +13,18 @@ export default function Cart() {
   const router = useRouter();
   const cart = useCart();
 
-  useEffect(() => {
-    UseIsLoading(true);
-    cart?.getCart();
-    cart?.cartTotal();
-    UseIsLoading(false);
-  }, [cart]);
+  // useEffect(() => {
+  //   UseIsLoading(true);
+  //   cart?.getCart();
+  //   cart?.cartTotal();
+  //   UseIsLoading(false);
+  // }, [cart]);
 
   const goToCheckout = () => {
-    if (!cart?.cartTotal()) {
-      alert("You don't have any items in the cart.");
-      return;
-    }
+    // if (!cart?.cartTotal()) {
+    //   alert("You don't have any items in the cart.");
+    //   return;
+    // }
     router.push("/checkout");
   };
 
@@ -35,6 +35,15 @@ export default function Cart() {
           <div className="text-2xl font-bold my-4">Shopping cart</div>
           <div className="relative flex items-baseline justify-center">
             <div className="w-[90%]">
+              <div>
+                <p className="text-center text-lg font-medium flex items-center justify-center">
+                  Empty
+                  <span>
+                    <AiOutlineShoppingCart size={22} />
+                  </span>
+                </p>
+              </div>
+              {/* 
               {cart?.getCart()?.length > 0 ? (
                 cart
                   ?.getCart()
@@ -42,15 +51,7 @@ export default function Cart() {
                     <CartItem key={product.id} product={product} />
                   ))
               ) : (
-                <div>
-                  <p className="text-center text-lg font-medium flex items-center justify-center">
-                    Empty
-                    <span>
-                      <AiOutlineShoppingCart size={22} />
-                    </span>
-                  </p>
-                </div>
-              )}
+              )} */}
             </div>
 
             {/* <div
