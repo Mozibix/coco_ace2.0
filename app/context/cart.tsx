@@ -34,7 +34,7 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
   const getCart = (): Product[] => {
     let cart: Product[] = [];
     if (typeof localStorage !== "undefined") {
-      cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart = JSON.parse(localStorage.getItem("cart")) || "";
     }
     return cart;
   };
@@ -42,7 +42,7 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
   const addToCart = (product: Product): void => {
     let cart: Product[] = [];
     if (typeof localStorage !== "undefined") {
-      cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart = JSON.parse(localStorage.getItem("cart")) || "";
     }
     cart.push(product);
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -53,7 +53,7 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
   const removeFromCart = (product: Product): void => {
     let cart: Product[] = [];
     if (typeof localStorage !== "undefined") {
-      cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart = JSON.parse(localStorage.getItem("cart")) || "";
     }
     cart = cart.filter((item) => item.id !== product.id);
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -64,7 +64,7 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
   const isItemAddedToCart = (product: Product): void => {
     let cart: Product[] = [];
     if (typeof localStorage !== "undefined") {
-      cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart = JSON.parse(localStorage.getItem("cart")) || "";
     }
     cart = cart.filter((item) => item.id === product.id);
 
@@ -79,7 +79,7 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
   const cartCount = (): number => {
     let cart: Product[] = [];
     if (typeof localStorage !== "undefined") {
-      cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart = JSON.parse(localStorage.getItem("cart")) || "";
     }
     return cart.length;
   };
@@ -88,7 +88,7 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
     let total = 0;
     let cart: Product[] = [];
     if (typeof localStorage !== "undefined") {
-      cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart = JSON.parse(localStorage.getItem("cart")) || "";
     }
     for (let i = 0; i < cart.length; i++) {
       const element = cart[i];
