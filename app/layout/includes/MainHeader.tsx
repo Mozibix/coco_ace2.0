@@ -15,8 +15,8 @@ const MainHeader = () => {
 
   return (
     <>
-      <nav>
-        <div className=" container flex_box box_shadow">
+      <div className="nav">
+        <div className="nav_inner">
           <div className="logo fw_700">
             <img className="img" src="/logo.png" alt="logo" />
             CocoAce Kollectibles
@@ -32,11 +32,13 @@ const MainHeader = () => {
               <div onClick={() => router.push("/cart")} className="relative">
                 <AiOutlineShoppingCart size={22} />
                 {cart.cartCount() > 0 ? (
-                  <div className="absolute text-[10px] -top-[2px] -right-[5px] bg-red-500 w-[14px] h-[14px] rounded-full text-white">
-                    <div className=" flex items-center justify-center -mt-[1px]">
-                      {cart.cartCount()}
+                  <>
+                    <div className="absolute text-[10px] -top-[2px] -right-[5px] bg-red-500 w-[14px] h-[14px] rounded-full text-white">
+                      <div className=" flex items-center justify-center -mt-[1px]">
+                        {cart.cartCount()}
+                      </div>
                     </div>
-                  </div>
+                  </>
                 ) : (
                   <></>
                 )}
@@ -44,7 +46,7 @@ const MainHeader = () => {
             </div>
           </div>
         </div>
-      </nav>
+      </div>
     </>
   );
 };
