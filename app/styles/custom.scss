@@ -10,10 +10,6 @@
   box-sizing: border-box;
 }
 
-.container {
-  padding: 1rem;
-}
-
 .fw_400 {
   font-weight: 400;
 }
@@ -62,6 +58,7 @@
   align-items: center;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  padding: 0.5rem;
 
   img {
     border: 2px solid $light_bg;
@@ -101,7 +98,23 @@ h2 {
 }
 
 .carousel_sec {
-  width: 10%;
+  width: 100%;
+}
+
+// PRODUCTS SECTION
+
+.products {
+  &_sec {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  &_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 }
 
 // FOOTER SECTION
