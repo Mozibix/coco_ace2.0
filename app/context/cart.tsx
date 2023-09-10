@@ -1,7 +1,13 @@
 "use client";
 
-import { useRouter } from "next/router"; // Updated import path
-import { createContext, useState, useContext, useEffect } from "react"; // Added useEffect for initial load
+import { useRouter } from "next/navigation"; // Updated import path
+import {
+  createContext,
+  useState,
+  useContext,
+  useEffect,
+  ReactNode,
+} from "react"; // Added useEffect for initial load
 
 interface Product {
   id: number;
@@ -26,8 +32,11 @@ interface CartContextType {
 }
 
 const Context = createContext<CartContextType | undefined>(undefined);
+interface ProviderProps {
+  children: ReactNode; // Define children prop with the ReactNode type
+}
 
-const Provider: React.FC = ({ children }) => {
+const Provider: React.FC<ProviderProps> = ({ children }) => {
   // Added React.FC for children
   const router = useRouter();
 
