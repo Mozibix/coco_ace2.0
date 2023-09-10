@@ -10,7 +10,7 @@ interface IProps {
 
 type User = {
   id: string | null;
-  email: string | null;
+  email: string | null | undefined; // Allow undefined email
   name: string | null;
   picture: string | null;
 };
@@ -45,6 +45,15 @@ const Provider: React.FC<IProps> = ({ children }) => {
     clearUser();
     return null;
   };
+  // Update the User type to allow undefined email
+  type User = {
+    id: string | null;
+    email: string | null | undefined; // Allow undefined email
+    name: string | null;
+    picture: string | null;
+  };
+
+  // ...
 
   const getCurrentUser = async () => {
     if (id) return;
@@ -53,14 +62,24 @@ const Provider: React.FC<IProps> = ({ children }) => {
     if (res && res.data.user) {
       const theUser = res.data.user;
 
-      setUser(theUser);
-      setId(theUser.id);
-      setEmail(theUser.email);
+      // Initialize name and picture with defaults
+      const initialName = theUser.identities?.[0]?.identity_data?.name || null;
+      const initialPicture =
+        theUser.identities?.[0]?.identity_data?.picture || null;
 
-      if (theUser.identities && theUser.identities[0]?.identity_data) {
-        setName(theUser.identities[0]?.identity_data.name);
-        setPicture(theUser.identities[0]?.identity_data.picture);
-      }
+      // Handle undefined email
+      const userEmail = theUser.email || null;
+
+      const userWithDefaults: User = {
+        ...theUser,
+        name: initialName,
+        picture: initialPicture,
+        email: userEmail,
+      };
+
+      setUser(userWithDefaults);
+      setId(theUser.id);
+      setEmail(userEmail);
     }
   };
 
