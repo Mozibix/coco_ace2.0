@@ -10,30 +10,30 @@ import { toast } from "react-toastify";
 import moment from "moment";
 
 export default function Orders() {
-  const { user } = useUser();
-  const [orders, setOrders] = useState([]);
+  // const { user } = useUser();
+  // const [orders, setOrders] = useState([]);
 
-  const getOrders = async () => {
-    try {
-      if (!user && !user?.id) return;
-      const response = await fetch("/api/orders");
-      const result = await response.json();
-      setOrders(result);
-      UseIsLoading(false);
-    } catch (error) {
-      toast.error("Something went wrong?", { autoClose: 3000 });
-      UseIsLoading(false);
-    }
-  };
+  // const getOrders = async () => {
+  //   try {
+  //     if (!user && !user?.id) return;
+  //     const response = await fetch("/api/orders");
+  //     const result = await response.json();
+  //     setOrders(result);
+  //     UseIsLoading(false);
+  //   } catch (error) {
+  //     toast.error("Something went wrong?", { autoClose: 3000 });
+  //     UseIsLoading(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    UseIsLoading(true);
-    getOrders();
-  }, [user]);
+  // useEffect(() => {
+  //   UseIsLoading(true);
+  //   getOrders();
+  // }, [user]);
 
   return (
     <>
-      <MainLayout>
+      {/* <MainLayout>
         <div
           id="OrdersPage"
           className="mt-4 max-w-[1200px] mx-auto px-2 min-h-[50vh]"
@@ -100,7 +100,7 @@ export default function Orders() {
             ))}
           </div>
         </div>
-      </MainLayout>
+      </MainLayout> */}
     </>
   );
 }

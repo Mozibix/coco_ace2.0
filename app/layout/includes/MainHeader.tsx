@@ -17,7 +17,10 @@ const MainHeader = () => {
     <>
       <div className="nav">
         <div className="nav_inner">
-          <div className="logo fw_700">
+          <div
+            onClick={() => router.push("/")}
+            className="logo cursor-pointer fw_700"
+          >
             <img className="img" src="/logo.png" alt="logo" />
             CocoAce Kollectibles
           </div>

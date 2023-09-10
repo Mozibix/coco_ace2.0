@@ -22,7 +22,7 @@ const CartItem: React.FC<IProps> = ({ product }) => {
 
   return (
     <>
-      <div className="relative flex justify-start my-2 border w-full p-6">
+      <div className="relative flex sm:gap-4 justify-start my-2 border w-full p-1">
         <img
           src={product?.url + "/150"}
           className="rounded-md w-[150px] h-[150px]"
@@ -33,16 +33,16 @@ const CartItem: React.FC<IProps> = ({ product }) => {
             <div className="flex items-center font-semibold justify-between w-[400px] text-[16px] underline">
               {product?.title}
             </div>
-            <div className="font-bold text-lg">
+            {/* <div className="font-bold text-lg">
               ${(product?.price / 100).toFixed(2)}
-            </div>
+            </div> */}
           </div>
 
           <div className="font-semibold text-blue-500 mt-2">NEW</div>
 
-          <div className="text-sm mt-2">
+          {/* <div className="text-sm mt-2">
             {product?.description.substring(0, 150)}...
-          </div>
+          </div> */}
 
           <div className="absolute right-0 bottom-0 p-4 text-sm">
             <button

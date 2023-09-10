@@ -33,28 +33,27 @@ export default function Cart() {
       <MainLayout>
         <div className="max-w-[1200px] mx-auto mb-8 min-h-[300px]">
           <div className="text-2xl font-bold my-4">Shopping cart</div>
-          <div className="relative flex items-baseline justify-between gap-2">
-            <ClientOnly>
-              <div className="w-[65%]">
-                {cart?.getCart()?.length > 0 ? (
-                  cart
-                    ?.getCart()
-                    ?.map((product) => (
-                      <CartItem key={product.id} product={product} />
-                    ))
-                ) : (
-                  <div>
-                    <p className="text-center text-lg font-medium flex items-center justify-center">
-                      Empty
-                      <span>
-                        <AiOutlineShoppingCart size={22} />
-                      </span>
-                    </p>
-                  </div>
-                )}
-              </div>
-            </ClientOnly>
-            <div
+          <div className="relative flex items-baseline justify-center">
+            <div className="w-[90%]">
+              {cart?.getCart()?.length > 0 ? (
+                cart
+                  ?.getCart()
+                  ?.map((product) => (
+                    <CartItem key={product.id} product={product} />
+                  ))
+              ) : (
+                <div>
+                  <p className="text-center text-lg font-medium flex items-center justify-center">
+                    Empty
+                    <span>
+                      <AiOutlineShoppingCart size={22} />
+                    </span>
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* <div
               id="GoToCheckout"
               className="md:w-[33%] absolute top-0 right-0 m-2"
             >
@@ -84,7 +83,7 @@ export default function Cart() {
                   </div>
                 </div>
               </ClientOnly>
-            </div>
+            </div> */}
           </div>
         </div>
 

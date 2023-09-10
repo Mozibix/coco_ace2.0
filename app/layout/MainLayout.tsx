@@ -21,10 +21,7 @@ const MainLayout: React.FC<IProps> = ({ children }) => {
 
   return (
     <>
-      <div
-        id="main_layout"
-        className="min-w-[1050px] max-w-[1300px] mx-auto border"
-      >
+      <div id="main_layout" className="max-w-[100%] mx-auto border">
         <div>
           {/* LOADING */}
           {/* {isLoading ? <Loading /> : <></>} */}

@@ -11,18 +11,10 @@ export default function CarouselComp() {
         <Carousel
           showArrows={false}
           autoPlay={true}
-          interval={2000}
+          interval={1000}
           infiniteLoop={true}
           showThumbs={false}
         >
-          <div>
-            <Image
-              width={500}
-              height={500}
-              src="/images/banner/1.png"
-              alt="banner"
-            />
-          </div>
           <div>
             <Image
               width={500}

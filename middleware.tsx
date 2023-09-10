@@ -12,8 +12,7 @@ export async function middleware(req: NextRequest) {
 
   if (
     !data?.session &&
-    (req.nextUrl.pathname.startsWith("/checkout") ||
-      req.nextUrl.pathname.startsWith("/success") ||
+    (req.nextUrl.pathname.startsWith("/success") ||
       req.nextUrl.pathname.startsWith("/orders") ||
       req.nextUrl.pathname.startsWith("/address"))
   ) {

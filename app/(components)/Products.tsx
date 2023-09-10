@@ -17,7 +17,7 @@ const Product: React.FC<IProp> = ({ product }) => {
         {product?.url ? (
           <img
             className="rounded cursor-pointer w-full h-[20rem]"
-            src={product.url}
+            src={product.url + "/150"}
             alt={product?.title}
           />
         ) : (
