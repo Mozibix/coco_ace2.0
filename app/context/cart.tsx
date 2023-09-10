@@ -74,7 +74,7 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
     cart = cart.filter((item) => item.id !== product.id);
     localStorage.setItem("cart", JSON.stringify(cart));
     isItemAddedToCart(product);
-    router.reload(); // Updated router refresh method
+    router.refresh(); // Updated router refresh method
   };
 
   const isItemAddedToCart = (product?: Product): void => {
@@ -100,7 +100,7 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
 
   const clearCart = (): void => {
     localStorage.removeItem("cart");
-    router.reload(); // Updated router refresh method
+    router.refresh(); // Updated router refresh method
   };
 
   const exposed = {
