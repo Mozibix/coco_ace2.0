@@ -51,17 +51,17 @@ export default function Product({ params }: ProductProps) {
     getProduct();
   }, [params.id]);
 
-  const addToCart = () => {
-    if (product) {
-      if (cart.isItemAdded) {
-        cart.removeFromCart(product);
-        toast.info("Removed from cart", { autoClose: 3000 });
-      } else {
-        cart.addToCart(product);
-        toast.success("Added to cart", { autoClose: 3000 });
-      }
-    }
-  };
+  // const addToCart = () => {
+  //   if (product) {
+  //     if (cart.isItemAdded) {
+  //       cart.removeFromCart(product);
+  //       toast.info("Removed from cart", { autoClose: 3000 });
+  //     } else {
+  //       cart.addToCart(product);
+  //       toast.success("Added to cart", { autoClose: 3000 });
+  //     }
+  //   }
+  // };
 
   return (
     <MainLayout>
@@ -96,7 +96,8 @@ export default function Product({ params }: ProductProps) {
 
                 <div className="pt-3">
                   <div className="w-full text-sm sm:text-lg flex items-center justify-between">
-                    <button
+                    <>button</>
+                    {/* <button
                       onClick={addToCart}
                       className={`text-white py-2 px-20 rounded-full cursor-pointer ${
                         cart.isItemAdded(product)
@@ -107,7 +108,7 @@ export default function Product({ params }: ProductProps) {
                       {cart.isItemAdded(product)
                         ? "Remove From Cart"
                         : "Add To Cart"}
-                    </button>
+                    </button> */}
                   </div>
                 </div>
 
