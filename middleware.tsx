@@ -13,8 +13,7 @@ export async function middleware(req: NextRequest) {
   if (
     !data?.session &&
     (req.nextUrl.pathname.startsWith("/success") ||
-      req.nextUrl.pathname.startsWith("/orders") ||
-      req.nextUrl.pathname.startsWith("/address"))
+      req.nextUrl.pathname.startsWith("/orders"))
   ) {
     return NextResponse.redirect(new URL("/auth", req.url));
   }
