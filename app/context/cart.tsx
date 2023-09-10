@@ -1,48 +1,27 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { createContext, useState, useContext, ReactNode } from "react";
+import { createContext, useState, useContext } from "react";
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-}
+const Context = createContext();
 
-interface CartContextProps {
-  isItemAdded: boolean;
-  getCart: () => Product[];
-  addToCart: (product: Product) => void;
-  removeFromCart: (product: Product) => void;
-  isItemAddedToCart: (product: Product) => void;
-  cartCount: () => number;
-  cartTotal: () => number;
-  clearCart: () => void;
-}
-
-const Context = createContext<CartContextProps | undefined>(undefined);
-
-interface ProviderProps {
-  children: ReactNode;
-}
-
-const Provider: React.FC<ProviderProps> = ({ children }) => {
+const Provider = ({ children }) => {
   const router = useRouter();
 
   const [isItemAdded, setIsItemAdded] = useState(false);
 
-  const getCart = (): Product[] => {
-    let cart: Product[] = [];
+  const getCart = () => {
+    let cart = [];
     if (typeof localStorage !== "undefined") {
-      cart = JSON.parse(localStorage.getItem("cart")) || "";
+      cart = JSON.parse(localStorage.getItem("cart")) || [];
     }
     return cart;
   };
 
-  const addToCart = (product: Product): void => {
-    let cart: Product[] = [];
+  const addToCart = (product) => {
+    let cart = [];
     if (typeof localStorage !== "undefined") {
-      cart = JSON.parse(localStorage.getItem("cart")) || "";
+      cart = JSON.parse(localStorage.getItem("cart")) || [];
     }
     cart.push(product);
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -50,10 +29,10 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
     router.refresh();
   };
 
-  const removeFromCart = (product: Product): void => {
-    let cart: Product[] = [];
+  const removeFromCart = (product) => {
+    let cart = [];
     if (typeof localStorage !== "undefined") {
-      cart = JSON.parse(localStorage.getItem("cart")) || "";
+      cart = JSON.parse(localStorage.getItem("cart")) || [];
     }
     cart = cart.filter((item) => item.id !== product.id);
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -61,10 +40,10 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
     router.refresh();
   };
 
-  const isItemAddedToCart = (product: Product): void => {
-    let cart: Product[] = [];
+  const isItemAddedToCart = (product) => {
+    let cart = [];
     if (typeof localStorage !== "undefined") {
-      cart = JSON.parse(localStorage.getItem("cart")) || "";
+      cart = JSON.parse(localStorage.getItem("cart")) || [];
     }
     cart = cart.filter((item) => item.id === product.id);
 
@@ -76,19 +55,19 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
     setIsItemAdded(false);
   };
 
-  const cartCount = (): number => {
-    let cart: Product[] = [];
+  const cartCount = () => {
+    let cart = [];
     if (typeof localStorage !== "undefined") {
-      cart = JSON.parse(localStorage.getItem("cart")) || "";
+      cart = JSON.parse(localStorage.getItem("cart")) || [];
     }
     return cart.length;
   };
 
-  const cartTotal = (): number => {
+  const cartTotal = () => {
     let total = 0;
-    let cart: Product[] = [];
+    let cart = [];
     if (typeof localStorage !== "undefined") {
-      cart = JSON.parse(localStorage.getItem("cart")) || "";
+      cart = JSON.parse(localStorage.getItem("cart")) || [];
     }
     for (let i = 0; i < cart.length; i++) {
       const element = cart[i];
@@ -98,12 +77,12 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
     return total;
   };
 
-  const clearCart = (): void => {
+  const clearCart = () => {
     localStorage.removeItem("cart");
     router.refresh();
   };
 
-  const exposed: CartContextProps = {
+  const exposed = {
     isItemAdded,
     getCart,
     addToCart,
@@ -117,12 +96,6 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
   return <Context.Provider value={exposed}>{children}</Context.Provider>;
 };
 
-export const useCart = (): CartContextProps => {
-  const context = useContext(Context);
-  if (context === undefined) {
-    throw new Error("useCart must be used within a CartProvider");
-  }
-  return context;
-};
+export const useCart = () => useContext(Context);
 
 export default Provider;
