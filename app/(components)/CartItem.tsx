@@ -1,7 +1,7 @@
 "use client";
-
 import { toast } from "react-toastify";
 import { useCart } from "../context/cart";
+import React from "react"; // Import React if it's not already imported in your file
 
 interface IProps {
   product: any;
@@ -15,7 +15,7 @@ const CartItem: React.FC<IProps> = ({ product }) => {
       `Are you sure you want to remove this? "${product.title}"`
     );
     if (res) {
-      cart.removeFromCart(product);
+      // cart.removeFromCart(product);
       toast.info("Removed from cart", { autoClose: 3000 });
     }
   };
