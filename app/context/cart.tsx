@@ -66,7 +66,7 @@ const Provider: React.FC<ProviderProps> = ({ children }) => {
 
     localStorage.setItem("cart", JSON.stringify(cart));
     isItemAddedToCart(product);
-    router.reload(); // Updated router refresh method
+    router.refresh(); // Updated router refresh method
   };
 
   const removeFromCart = (product: Product): void => {
