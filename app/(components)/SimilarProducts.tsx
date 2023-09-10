@@ -6,7 +6,6 @@ import { BiLoader } from "react-icons/bi";
 
 interface Product {
   id: number;
-  // Define the other properties of your Product type here
 }
 
 export default function SimilarProducts() {
@@ -36,16 +35,14 @@ export default function SimilarProducts() {
   return (
     <>
       <div>
-        <div className="border-b py-1 max-w-[1200px] mx-auto" />
+        <div className="border-b p-4 max-w-[1200px] mx-auto" />
 
         <div className="max-w-[1200px] mx-auto">
-          <div className="font-bold text-2xl py-2 mt-4">
-            Similar sponsored items
-          </div>
+          <div className="font-bold text-2xl px-4  mt-4">Similar items</div>
 
           {products.length > 0 ? (
             <>
-              <div className="grid grid-cols-5 gap-4">
+              <div className="similar_products_container">
                 {products.map((product) => (
                   <ProductComp key={product.id} product={product} />
                 ))}
