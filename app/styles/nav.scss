@@ -1,15 +1,9 @@
-nav {
-  .flex_box {
+.nav {
+  .nav_inner {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
-
-    .logo {
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
+    padding: 1rem 0;
   }
 
   .social {
@@ -17,4 +11,11 @@ nav {
     justify-content: center;
     align-items: center;
   }
+}
+
+.logo {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
